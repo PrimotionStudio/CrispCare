@@ -29,8 +29,7 @@ header {
 	display: flex;
 }
 .nav li {
-	text-align: center;
-	margin: 0 2em;
+	flex: 1;
 }
 .account {
 	width: 3em;
@@ -48,5 +47,42 @@ header {
 	width: 50%;
 	height: 5em;
 	position: absolute;
-	/* margin: 0 auto; */
+}
+section {
+	margin: 2.5em 5em;
+	padding: 2.5em 0;
+	display: flex;
+	border-bottom: 1px solid grey;
+}
+.card {
+	width: 33.3%;
+	border: 1px solid grey;
+	border-radius: 2em;
+	padding: 1.5em;
+	margin: 1em;
+}
+.photo {
+	width: 15em;
+	height: 15em;
+	border: none;
+	border-radius: 50%;
+	background-color:  grey;
+	/* text-align: center; */
+	margin: 0 auto 1.2em;
+}
+.view_profile {
+	display: flex;
+	justify-content: start;
+	margin: 1em 0 0 0;
+}
+.card button {
+	padding: 0.5em 1em;
+	border: none;
+	border-radius: 0.5em 2em 2em 0.5em;
+	background-color: green;
+}
+footer {
+	padding: 0 0 2.5em 0;
+	display: flex;
+	justify-content: center;
 }
