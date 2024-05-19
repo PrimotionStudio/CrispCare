@@ -39,3 +39,14 @@ header {
 	border-radius: 50%;
 	background-color: grey;
 }
+.bottom_header {
+	display: flex;
+	justify-content: space-around;
+}
+.searchbar {
+	background-color: blue;
+	width: 50%;
+	height: 5em;
+	position: absolute;
+	/* margin: 0 auto; */
+}
