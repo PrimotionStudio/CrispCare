@@ -1,0 +1,64 @@
+#create engine
+#create session
+#base delaration for the table to inherit
+#create tables
+#and migrate
+# Import necessary modules
+from sqlalchemy import create_engine, Column, Integer, String
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+
+# Database URL
+DATABASE_URL = 'mysql+pymysql://zika_crispcare:CrispCare123!@localhost/crisp_care'
+
+# Create engine
+engine = create_engine(DATABASE_URL)
+
+# Create session in order to create a table
+Session = sessionmaker(bind=engine)
+session = Session()
+
+# Base declaration for the table to inherit
+Base = declarative_base()
+
+# Define the Student class
+class Student(Base):
+    __tablename__ = 'student'
+    id = Column(Integer, primary_key=True)
+    name = Column(String(50))
+    age = Column(Integer)
+    grade = Column(String(50))
+
+# Migrate the table into the database
+Base.metadata.create_all(engine)
+
+#create instance of the class
+
+student1 = Student(name = "Zika", age = 25, grade = 4.5)
+student2 = Student(name = "Bella", age = 27, grade = 67)
+student3 = Student(name = "maertins", age = 22, grade = 55)
+
+session.add_all([student2, student3])
+session.add(student1)
+session.commit()
+
+#to get data  from studen
+
+students = session.query(Student)
+
+for student in students:
+	print(student.name, student.age)
+
+# to update
+update_stu = session.query(Student).filter(Student.name=="Martins")
+
+update_stu.name = "Joe"
+session.commit()
+print(update_stu.name)
+
+
+#to delete
+update_stu = session.query(Student).filter(Student.name=="Joe")
+session.delete(update_stu)
+session.commit()
+print(update_stu.name)
