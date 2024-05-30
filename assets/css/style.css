@@ -12,6 +12,10 @@ header {
 	padding: 2.5em 0;
 	border-bottom: 0.1px solid grey;
 }
+a {
+	text-decoration: none;
+	color: #000;
+}
 .top_header {
 	/* justify-content:center; */
 	display: flex;
@@ -61,6 +65,13 @@ section {
 	padding: 1.5em;
 	margin: 1em;
 }
+.card1_2 {
+	width: 50%;
+	border: 1px solid grey;
+	border-radius: 2em;
+	padding: 1.5em;
+	margin: 1em;
+}
 .cardx2 {
 	width: 66.6%;
 	/* height: 400px; */
@@ -73,6 +84,9 @@ section {
 	margin: 1em;
 	text-align: center;
 	font-size: x-large;
+}
+.card1_2 h3 {
+	margin: 1em;
 }
 .photo {
 	width: 15em;
@@ -94,7 +108,7 @@ section {
 	border-radius: 0.5em 2em 2em 0.5em;
 	background-color: green;
 }
-.cardx2 button {
+.cardx2 button, .card1_2 button {
 	padding: 0.75em 1em;
 	border: none;
 	width: 5em;
