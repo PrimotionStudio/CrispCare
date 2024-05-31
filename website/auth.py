@@ -3,6 +3,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User
 from . import db
+from .views import views
 from .forms import SignupForm, LoginForm
 import logging
 
@@ -11,7 +12,7 @@ auth = Blueprint('auth', __name__)
 # Setup logging
 logging.basicConfig(level=logging.DEBUG)
 
-@auth.route('/signup', methods=['GET', 'POST'])
+@auth.route('/signup', methods=['POST'])
 def signup():
     if current_user.is_authenticated:
         return redirect(url_for('views.home'))
@@ -25,7 +26,7 @@ def signup():
             db.session.add(new_user)
             db.session.commit()
             flash('Account created successfully! You can now log in.', 'success')
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('views.auth'))
         except Exception as e:
             logging.error(f"Error occurred: {e}")
             flash('An error occurred while creating your account. Please try again.', 'danger')
