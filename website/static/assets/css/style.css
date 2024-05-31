@@ -102,7 +102,7 @@ section {
 	justify-content: start;
 	margin: 1em 0 0 0;
 }
-.view_profile button  {
+.view_profile button {
 	color: #f0f0f0;
 }
 .card button {
@@ -111,7 +111,8 @@ section {
 	border-radius: 0.5em 2em 2em 0.5em;
 	background-color: green;
 }
-.cardx2 button, .card1_2 button {
+.cardx2 button,
+.card1_2 button {
 	padding: 0.75em 1em;
 	border: none;
 	width: 5em;
@@ -178,6 +179,22 @@ footer {
 	display: inline-flex;
 }
 .skillset li::after {
-	content: ',';
+	content: ",";
 	margin-right: 0.8em;
+}
+.back_header button {
+	color: #f0f0f0;
+	border: none;
+	margin-left: 1em;
+	border-radius: 2em 0.5em 0.5em 2em;
+}
+.back_header {
+	display: flex;
+	align-items: center;
+}
+.back_header h3 {
+	width: 100%;
+}
+.card1_2 h2 {
+	text-align: center;
 }

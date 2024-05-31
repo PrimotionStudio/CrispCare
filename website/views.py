@@ -42,6 +42,11 @@ def book():
     return render_template("book.html")
 
 
+@views.route("/account_type")
+def account_type():
+    return render_template("account_type.html")
+
+
 
 @views.route('/api/househelps', methods=['GET'])
 def get_househelps():

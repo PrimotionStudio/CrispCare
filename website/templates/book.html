@@ -4,7 +4,10 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Book - Crisp Care</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}" />
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='assets/css/style.css') }}"
+		/>
 	</head>
 	<body>
 		<header>
@@ -15,7 +18,10 @@
 					<li>About</li>
 					<li><a href="contact">Contact</a></li>
 				</ul>
-				<div class="account" onclick="window.location.assign('auth')"></div>
+				<div
+					class="account"
+					onclick="window.location.assign('auth')"
+				></div>
 			</div>
 			<div class="bottom_header">
 				<div class="searchbar"></div>
@@ -33,33 +39,44 @@
 						explicabo aliquid numquam?
 					</p>
 				</div>
-				<div class="view_profile">
+				<!-- <div class="view_profile">
 					<button title="Click to book person">Book</button>
-				</div>
+				</div> -->
 			</div>
 			<div class="cardx2">
-				<h3>We'd Love To Hear From You</h3>
+				<div class="back_header">
+					<button title="Go back to profile">Back</button>
+					<h3>Description of housekeeping activies</h3>
+				</div>
 				<form action="" method="post">
 					<div class="entry">
-						<label for="name">Name</label>
-                        <input type="text" name="name" id="name" />
+						<label for="description">Description</label>
+						<textarea
+							name="description"
+							id="description"
+							cols="30"
+							rows="5"
+						></textarea>
 					</div>
 					<div class="entry">
-						<label for="email">Email</label>
-						<input type="email" name="email" id="email" />
+						<label for="date">Date</label>
+						<input type="datetime-local" name="date" id="date" />
 					</div>
 					<div class="entry">
-						<label for="message">Message</label>
-						<textarea name="message" id="message" cols="30" rows="10"></textarea>
+						<label for="location">Location</label>
+						<input type="text" name="location" id="location" />
 					</div>
 				</form>
 				<div class="view_profile">
-					<button title="Click to view profile">View</button>
+					<button title="Click to view profile">Book</button>
 				</div>
 			</div>
 		</section>
 		<footer>
-			<sub>Made with &hearts; by Martins Okanlawon, Ngozi Ndukauba, Isabella Akunekwu - Crisp Care &copy; 2024</sub>
+			<sub
+				>Made with &hearts; by Martins Okanlawon, Ngozi Ndukauba,
+				Isabella Akunekwu - Crisp Care &copy; 2024</sub
+			>
 		</footer>
 	</body>
 </html>
