@@ -1,19 +1,18 @@
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 from .models import User, HouseKeeper, Booking
 from . import db
 
 views = Blueprint('views', __name__)
 
 @views.route("/")
-@login_required
 def front_page():
-    return render_template("index.html")
+    return render_template("index.html", user=current_user)
 
-
-# @views.route("/home")
-# def _home():
-#     return redirect(url_for("views.home"))
+@views.route("/home")
+@login_required
+def home():
+    return render_template("index.html", user=current_user)
 
 
 # @views.route("/index")
@@ -23,27 +22,19 @@ def front_page():
 
 @views.route("/contact")
 def contact():
-    return render_template("contact.html")
-
-
-@views.route("/auth")
-def auth():
-    return render_template("signin_signup.html")
-	
+    return render_template("contact.html", user=current_user)
 
 @views.route("/profile")
 def profile():
-    return render_template("profile.html")
-
+    return render_template("profile.html", user=current_user)
 
 @views.route("/book")
 def book():
-    return render_template("book.html")
-
+    return render_template("book.html", user=current_user)
 
 @views.route("/account_type")
 def account_type():
-    return render_template("account_type.html")
+    return render_template("account_type.html", user=current_user)
 
 
 

@@ -27,7 +27,7 @@ def signup():
             db.session.commit()
             flash("Account created", category="success")
             return redirect(url_for('auth.login'))
-    return render_template("signin_signup.html")
+    return render_template("signin_signup.html", user=current_user)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
@@ -47,12 +47,12 @@ def login():
                 if check_password_hash(user.password, password):
                     login_user(user, remember=True)
                     flash("Login Successful", category="success")
-                    return redirect(url_for('views.front_page'))
+                    return redirect(url_for('views.home'))
                 else:
                     flash("Incorrect password", category="error")
             else:
                 flash("This email is not linked to an account", category="error")
-    return render_template("signin_signup.html")
+    return render_template("signin_signup.html", user=current_user)
 
 @auth.route('/logout')
 @login_required
