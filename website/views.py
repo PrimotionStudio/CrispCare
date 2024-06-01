@@ -1,25 +1,24 @@
-# website/views.py
-
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for
 from flask_login import login_required
-from .models import User, HouseHelp, Booking
+from .models import User, HouseKeeper, Booking
 from . import db
 
 views = Blueprint('views', __name__)
 
 @views.route("/")
-def home():
+@login_required
+def front_page():
     return render_template("index.html")
 
 
-@views.route("/home")
-def _home():
-    return redirect(url_for("views.home"))
+# @views.route("/home")
+# def _home():
+#     return redirect(url_for("views.home"))
 
 
-@views.route("/index")
-def index():
-    return redirect(url_for("views.home"))
+# @views.route("/index")
+# def index():
+#     return redirect(url_for("views.home"))
 
 
 @views.route("/contact")
@@ -50,7 +49,7 @@ def account_type():
 
 @views.route('/api/househelps', methods=['GET'])
 def get_househelps():
-    househelps = HouseHelp.query.all()
+    househelps = HouseKeeper.query.all()
     househelps_list = []
     for h in househelps:
         househelp_dict = {
@@ -80,7 +79,7 @@ def book_househelp():
 @views.route('/api/register_househelp', methods=['POST'])
 def register_househelp():
     data = request.get_json()
-    new_househelp = HouseHelp(
+    new_househelp = HouseKeeper(
         name=data['name'],
         age=data['age'],
         services=data['services'],

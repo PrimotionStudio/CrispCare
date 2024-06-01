@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{% block title %}Crisp Care{% endblock%}</title>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='assets/css/style.css') }}"
+		/>
+	</head>
+	<body>
+		<header>
+			<div class="top_header">
+				<div class="logo"></div>
+				<ul class="nav">
+					<li><a href="index">Home</a></li>
+					<li>About</li>
+					<li><a href="contact">Contact</a></li>
+				</ul>
+				<div
+					class="account"
+					onclick="window.location.assign('login')"
+				></div>
+			</div>
+			<div class="bottom_header">
+				<div class="searchbar">
+					{% with flashed_msg = get_flashed_messages(with_categories=true) %}
+					{% if flashed_msg %}
+					{% for cat, msg in flashed_msg %}
+					{% if cat == 'success' %} Success {% else %} Error {% endif %} Flash: {{ msg }}
+					{% endfor %}
+					{% endif %}
+					{% endwith %}
+					{% block search_or_heading %} {% endblock %}
+				</div>
+			</div>
+		</header>
+		{% block section_or_body%} {% endblock %}
+		<footer>
+			<sub
+				>Made with &hearts; by Martins Okanlawon, Ngozi Ndukauba,
+				Isabella Akunekwu - Crisp Care &copy; 2024</sub
+			>
+		</footer>
+	</body>
+</html>

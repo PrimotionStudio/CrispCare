@@ -1,36 +1,37 @@
 from . import db
 from flask_login import UserMixin
-
-class HouseHelp(db.Model):
-    __tablename__ = 'househelps'
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    name = db.Column(db.String(100), nullable=False)
-    age = db.Column(db.Integer, nullable=False)
-    services = db.Column(db.String(200), nullable=False)
-    rating = db.Column(db.Float, nullable=True)
+from sqlalchemy.sql import func
 
 class Booking(db.Model):
-    __tablename__ = 'bookings'
+    __tablename__ = 'booking'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    househelp_id = db.Column(db.Integer, db.ForeignKey('househelps.id'), nullable=False)
-    date = db.Column(db.Date, nullable=False)
-    time = db.Column(db.Time, nullable=False)
-    requirements = db.Column(db.String(200), nullable=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    housekeeper_id = db.Column(db.Integer, db.ForeignKey('housekeeper.id'), nullable=False)
+    description = db.Column(db.String(5000), nullable=True)
+    timestamp = db.Column(db.DateTime(timezone=True), default=func.now())
+
+class HouseKeeper(db.Model):
+    __tablename__ = 'housekeeper'
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    services = db.Column(db.String(200), nullable=False)
+    rating = db.Column(db.Float, nullable=True)
+    bookings = db.relationship("Booking", backref='housekeeper', lazy=True)
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users'
+    __tablename__ = 'user'
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
+    fullname = db.Column(db.String(50), unique=True, nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
+    bookings = db.relationship('Booking', backref='user', lazy=True)
+    
 
     # Flask-Login properties
-    @property
-    def is_active(self):
-        return True
+    # @property
+    # def is_active(self):
+    #     return True
 
-    def get_id(self):
-        return self.id
+    # def get_id(self):
+    #     return self.id
 
