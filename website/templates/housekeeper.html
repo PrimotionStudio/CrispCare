@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block title %}Housekeeper's Information - Crisp Care{% endblock %}
+{% block search_or_heading %} {% endblock %}
+{% block section_or_body %}
+<section>
+	<div class="card">
+		<div class="photo" title="Person Person"></div>
+		<div class="rating"><p>&star;&star;&star;&star;&star;</p></div>
+		<div class="description">
+			<p>
+				Lorem ipsum dolor sit, amet consectetur adipisicing
+				elit. Aliquam, odit nobis, fuga reiciendis fugiat
+				necessitatibus omnis tenetur labore nesciunt corrupti
+				explicabo aliquid numquam?
+			</p>
+		</div>
+		<!-- <div class="view_profile">
+			<button title="Click to book person">Book</button>
+		</div> -->
+	</div>
+	<div class="cardx2">
+		<div class="back_header">
+			<h3>Give us some information about yourself</h3>
+		</div>
+		<form action="{{ url_for('views.set_housekeeper') }}" method="post">
+			<div class="entry">
+				<label for="skillset">Write out the set of skills/services you will offer (seperated by commas)</label>
+				<input type="text" name="skillset" id="skillset" />
+			</div>
+			<div class="entry">
+				<label for="intro">Introduce yourself to a potential employer</label>
+				<textarea
+					name="intro"
+					id="intro"
+					cols="30"
+					rows="5"
+				></textarea>
+			</div>
+		</form>
+		<div class="view_profile">
+			<button type="submit">Save</button>
+		</div>
+	</div>
+</section>
+{% endblock %}

@@ -9,33 +9,46 @@ views = Blueprint('views', __name__)
 def front_page():
     return render_template("index.html", user=current_user)
 
+@views.route("/contact")
+def contact():
+    return render_template("contact.html", user=current_user)
+
 @views.route("/home")
 @login_required
 def home():
     return render_template("index.html", user=current_user)
 
-
-# @views.route("/index")
-# def index():
-#     return redirect(url_for("views.home"))
-
-
-@views.route("/contact")
-def contact():
-    return render_template("contact.html", user=current_user)
+@views.route("/index")
+def index():
+    return redirect(url_for("views.home"))
 
 @views.route("/profile")
+@login_required
 def profile():
     return render_template("profile.html", user=current_user)
 
 @views.route("/book")
+@login_required
 def book():
     return render_template("book.html", user=current_user)
 
 @views.route("/account_type")
+@login_required
 def account_type():
     return render_template("account_type.html", user=current_user)
 
+
+@views.route("/housekeeper_info", methods=['GET', 'POST'])
+@login_required
+def set_housekeeper():
+    if request.method == 'POST':
+        skillset = request.form.get("skillset")
+        intro = request.form.get("intro")
+        new_housekeeper = HouseKeeper(user_id=current_user.id, skillset=skillset, intro=intro)
+        db.session.add(new_housekeeper)
+        db.session.commit()
+        return redirect(url_for('views.home'))
+    return render_template("housekeeper.html", user=current_user)
 
 
 @views.route('/api/househelps', methods=['GET'])

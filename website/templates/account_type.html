@@ -1,38 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Account Type - Crisp Care</title>
-		<link rel="stylesheet" href="{{ url_for('static', filename='assets/css/style.css') }}" />
-	</head>
-	<body>
-		<header>
-			<div class="top_header">
-				<div class="logo"></div>
-				<ul class="nav">
-					<li><a href="index">Home</a></li>
-					<li>About</li>
-					<li><a href="contact">Contact</a></li>
-				</ul>
-				<div class="account" onclick="window.location.assign('auth')"></div>
-			</div>
-			<div class="bottom_header">
-				<div class="searchbar"></div>
-			</div>
-		</header>
-		<section>
-			<div class="card1_2">
-				<div class="photo" title="Person Person"></div>
-				<h2>House Keeper</h2>
-			</div>
-			<div class="card1_2">
-				<div class="photo" title="Person Person"></div>
-				<h2>Home Owner</h2>
-			</div>
-		</section>
-		<footer>
-			<sub>Made with &hearts; by Martins Okanlawon, Ngozi Ndukauba, Isabella Akunekwu - Crisp Care &copy; 2024</sub>
-		</footer>
-	</body>
-</html>
+{% extends "base.html" %}
+{% block title %}Account Type - Crisp Care{% endblock %}
+{% block search_or_heading %} {% endblock %}
+{% block section_or_body %}
+<section>
+	<div class="card1_2" onclick="window.location.assign('{{url_for("views.set_housekeeper")}}')">
+		<div class="photo" title="Person Person"></div>
+		<h2>House Keeper</h2>
+	</div>
+	<div class="card1_2" onclick="window.location.assign('{{url_for("views.home")}}')">
+		<div class="photo" title="Person Person"></div>
+		<h2>Home Owner</h2>
+	</div>
+</section>
+{% endblock %}

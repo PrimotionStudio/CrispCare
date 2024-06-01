@@ -25,8 +25,9 @@ def signup():
             new_user = User(fullname=fullname, email=email, password=password)
             db.session.add(new_user)
             db.session.commit()
+            login_user(new_user, remember=True)
             flash("Account created", category="success")
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('views.account_type'))
     return render_template("signin_signup.html", user=current_user)
 
 
