@@ -29,6 +29,10 @@ def home():
 def index():
     return redirect(url_for("views.home"))
 
+@views.route("/profile/<hk_id>")
+def profile_by_id(hk_id):
+    return render_template("profile.html", user=current_user)
+
 @views.route("/profile")
 @login_required
 def profile():

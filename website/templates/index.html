@@ -12,7 +12,7 @@ search_or_heading %} {% endblock %} {% block section_or_body %}
 		<h4 class="skillset">Skillset</h4>
 		<p class="skills">{{ hk[1]["skillset"] }}</p>
 		<div class="view_profile">
-			<button title="Click to view profile">View</button>
+			<a href="{{ url_for('views.profile_by_id') }}/{{ user.id }}" class="button">View</a>
 		</div>
 	</div>
 	{% if i % 3 == 0 and i != hks|length %}
