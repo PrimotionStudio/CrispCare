@@ -177,6 +177,14 @@ footer {
 .skillset {
 	list-style: none;
 	display: inline-flex;
+	width: 100%;
+	margin: 1em 0 0;
+	border-top: 1px solid grey;
+	font-size: 0.8em;
+	padding: 1em 0 0;
+}
+.skills {
+	font-size: 0.8em;
 }
 .skillset li::after {
 	content: ",";
@@ -196,5 +204,8 @@ footer {
 	width: 100%;
 }
 .card1_2 h2 {
+	text-align: center;
+}
+.fullname {
 	text-align: center;
 }

@@ -5,15 +5,8 @@
 <section>
 	<div class="card">
 		<div class="photo" title="Person Person"></div>
+		<h3 class="fullname">{{ user.fullname }}</h3>
 		<div class="rating"><p>&star;&star;&star;&star;&star;</p></div>
-		<div class="description">
-			<p>
-				Lorem ipsum dolor sit, amet consectetur adipisicing
-				elit. Aliquam, odit nobis, fuga reiciendis fugiat
-				necessitatibus omnis tenetur labore nesciunt corrupti
-				explicabo aliquid numquam?
-			</p>
-		</div>
 		<!-- <div class="view_profile">
 			<button title="Click to book person">Book</button>
 		</div> -->
@@ -36,10 +29,10 @@
 					rows="5"
 				></textarea>
 			</div>
+			<div class="view_profile">
+				<button type="submit">Save</button>
+			</div>
 		</form>
-		<div class="view_profile">
-			<button type="submit">Save</button>
-		</div>
 	</div>
 </section>
 {% endblock %}

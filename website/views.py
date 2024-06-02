@@ -1,13 +1,20 @@
-from flask import Blueprint, request, jsonify, render_template, redirect, url_for
+from flask import Blueprint, request, jsonify, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
 from .models import User, HouseKeeper, Booking
 from . import db
 
 views = Blueprint('views', __name__)
 
+def get_housekeepers():
+    housekeepers = HouseKeeper.query.all()
+    users = []
+    for housekeeper in housekeepers:
+        users.append(User.query.filter_by(id=housekeeper.user_id).first())
+    return list(enumerate(zip(users, housekeepers), 1))
+
 @views.route("/")
 def front_page():
-    return render_template("index.html", user=current_user)
+    return render_template("index.html", user=current_user, hks=get_housekeepers())
 
 @views.route("/contact")
 def contact():
@@ -16,7 +23,7 @@ def contact():
 @views.route("/home")
 @login_required
 def home():
-    return render_template("index.html", user=current_user)
+    return render_template("index.html", user=current_user, hks=get_housekeepers())
 
 @views.route("/index")
 def index():
@@ -42,11 +49,19 @@ def account_type():
 @login_required
 def set_housekeeper():
     if request.method == 'POST':
-        skillset = request.form.get("skillset")
-        intro = request.form.get("intro")
-        new_housekeeper = HouseKeeper(user_id=current_user.id, skillset=skillset, intro=intro)
-        db.session.add(new_housekeeper)
+        skillset = request.form.get("skillset").strip()
+        intro = request.form.get("intro").strip()
+        old_housekeeper = HouseKeeper.query.filter_by(user_id=current_user.id).first();
+        if old_housekeeper:
+            # Then update the housekeeper's info
+            old_housekeeper.skillset = skillset
+            old_housekeeper.intro = intro
+        else:
+            # else create new housekeeper's info
+            new_housekeeper = HouseKeeper(user_id=current_user.id, skillset=skillset, intro=intro)
+            db.session.add(new_housekeeper)
         db.session.commit()
+        flash("Information updated successfully", category="success")
         return redirect(url_for('views.home'))
     return render_template("housekeeper.html", user=current_user)
 
