@@ -11,9 +11,12 @@ def get_housekeepers():
     for housekeeper in housekeepers:
         users.append(User.query.filter_by(id=housekeeper.user_id).first())
     return list(enumerate(zip(users, housekeepers), 1))
+    # Passing No argumnets return a list of tuples contaianing both users and houskeepers
 
 @views.route("/")
 def front_page():
+    if current_user.is_authenticated:
+        return redirect(url_for("views.home"))
     return render_template("index.html", user=current_user, hks=get_housekeepers())
 
 @views.route("/contact")
@@ -29,14 +32,33 @@ def home():
 def index():
     return redirect(url_for("views.home"))
 
+# For housekeepers
 @views.route("/profile/<hk_id>")
 def profile_by_id(hk_id):
-    return render_template("profile.html", user=current_user)
+    housekeeper = HouseKeeper.query.filter_by(id=hk_id).first()
+    if housekeeper:
+        user = User.query.filter_by(id=housekeeper.user_id).first()
+        return render_template("profile.html", user=current_user, hk=(user, housekeeper))
+        # Passing an argumnets returns a tuples contaianing both users and houskeepers
+    else:
+        flash("Cannot access this profile", category="error")
+        return redirect(url_for("views.home"))
 
+# For ordinary users
 @views.route("/profile")
 @login_required
 def profile():
+    hk = HouseKeeper.query.filter_by(user_id=current_user.id).first()
+    if hk:
+        # Check first if the user is a registered housekeeper
+        return redirect(url_for("views.profile_by_id", hk_id=hk.id))
     return render_template("profile.html", user=current_user)
+
+# For ordinary users
+@views.route("/settings", methods=["GET", "POST"])
+@login_required
+def settings():
+    return render_template("settings.html", user=current_user)
 
 @views.route("/book")
 @login_required

@@ -51,6 +51,9 @@ a {
 	width: 50%;
 	height: 5em;
 	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 section {
 	margin: 2.5em 5em;
@@ -207,5 +210,10 @@ footer {
 	text-align: center;
 }
 .fullname {
+	text-align: center;
+}
+.flash {
+	font-size: 1.5em;
+	color: #f0f0f0;
 	text-align: center;
 }

@@ -13,17 +13,22 @@
 		<header>
 			<div class="top_header">
 				<div class="logo"></div>
-				<ul class="nav">
-					<li><a href="{{url_for('views.front_page')}}">Home</a></li>
-					<li>About</li>
-					<li><a href="{{url_for('views.contact')}}">Contact</a></li>
-				</ul>
 				{% if user.is_authenticated %} 
+				<ul class="nav">
+					<li><a href="{{url_for('views.home')}}">Home</a></li>
+					<li><a href="{{url_for('views.profile')}}">Profile</a></li>
+					<li><a href="{{url_for('views.settings')}}">Settings</a></li>
+				</ul>
 				<div
 					class="account"
 					onclick="window.location.assign('{{url_for("auth.logout")}}')"
 				>{{url_for("auth.logout")}}</div>
 				{% else %}
+				<ul class="nav">
+					<li><a href="{{url_for('views.front_page')}}">Home</a></li>
+					<li>About</li>
+					<li><a href="{{url_for('views.contact')}}">Contact</a></li>
+				</ul>
 				<div
 					class="account"
 					onclick="window.location.assign('{{url_for("auth.login")}}')"
@@ -35,7 +40,9 @@
 					{% with flashed_msg = get_flashed_messages(with_categories=true) %}
 					{% if flashed_msg %}
 					{% for cat, msg in flashed_msg %}
-					{% if cat == 'success' %} Success {% else %} Error {% endif %} Flash: {{ msg }}
+					<span class="flash">
+						{% if cat == 'success' %} Success {% else %} Error {% endif %} Flash: {{ msg }}
+					</span>
 					{% endfor %}
 					{% endif %}
 					{% endwith %}
