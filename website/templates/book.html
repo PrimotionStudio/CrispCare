@@ -1,26 +1,30 @@
-{% extends "base.html" %}
-{% block title %}Booking - Crisp Care{% endblock %}
-{% block search_or_heading %} {% endblock %}
-{% block section_or_body %}
+{% extends "base.html" %} {% block title %}Booking - Crisp Care{% endblock %} {%
+block search_or_heading %} {% endblock %} {% block section_or_body %}
 <section>
 	<div class="card">
 		<div class="photo" title="Person Person"></div>
 		<div class="rating"><p>&star;&star;&star;&star;&star;</p></div>
 		<div class="description">
 			<p>
-				Lorem ipsum dolor sit, amet consectetur adipisicing
-				elit. Aliquam, odit nobis, fuga reiciendis fugiat
-				necessitatibus omnis tenetur labore nesciunt corrupti
-				explicabo aliquid numquam?
+				Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+				Aliquam, odit nobis, fuga reiciendis fugiat necessitatibus omnis
+				tenetur labore nesciunt corrupti explicabo aliquid numquam?
 			</p>
 		</div>
 	</div>
 	<div class="cardx2">
 		<div class="back_header">
-			<a href="{{ url_for('views.profile_by_id', hk_id=hk[0].id) }}" class="button">Back</a>
+			<a
+				href="{{ url_for('views.profile_by_id', hk_id=hk[0].id) }}"
+				class="button"
+				>Back</a
+			>
 			<h3>Description of housekeeping activies</h3>
 		</div>
-		<form action="{{ url_for('views.book', hk_id=hk[0].id) }}" method="post">
+		<form
+			action="{{ url_for('views.book', hk_id=hk[0].id) }}"
+			method="post"
+		>
 			<div class="entry">
 				<label for="description">Description</label>
 				<textarea
@@ -28,18 +32,46 @@
 					id="description"
 					cols="30"
 					rows="5"
+					minlength="10"
+					required
 				></textarea>
 			</div>
 			<div class="entry">
-				<label for="date">Date</label>
-				<input type="datetime-local" name="date" id="date" />
+				<label for="start_date">Start Date/Time</label>
+				<input
+					type="datetime-local"
+					name="start_date"
+					id="start_date"
+					required
+				/>
+			</div>
+			<div class="entry">
+				<label for="end_date">End Date/Time</label>
+				<input
+					type="datetime-local"
+					name="end_date"
+					id="end_date"
+					required
+				/>
 			</div>
 			<div class="entry">
 				<label for="location">Location</label>
-				<input type="text" name="location" id="location" />
+				<input
+					type="text"
+					name="location"
+					minlength="10"
+					id="location"
+					required
+				/>
 			</div>
 			<div class="view_profile">
-				<button class="button" type="submit" title="Click to view profile">Book</button>
+				<button
+					class="button"
+					type="submit"
+					title="Click to view profile"
+				>
+					Book
+				</button>
 			</div>
 		</form>
 	</div>
