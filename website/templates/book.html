@@ -14,16 +14,13 @@
 				explicabo aliquid numquam?
 			</p>
 		</div>
-		<!-- <div class="view_profile">
-			<button title="Click to book person">Book</button>
-		</div> -->
 	</div>
 	<div class="cardx2">
 		<div class="back_header">
-			<button class="button" title="Go back to profile">Back</button>
+			<a href="{{ url_for('views.profile_by_id', hk_id=hk[0].id) }}" class="button">Back</a>
 			<h3>Description of housekeeping activies</h3>
 		</div>
-		<form action="" method="post">
+		<form action="{{ url_for('views.book', hk_id=hk[0].id) }}" method="post">
 			<div class="entry">
 				<label for="description">Description</label>
 				<textarea
@@ -41,10 +38,10 @@
 				<label for="location">Location</label>
 				<input type="text" name="location" id="location" />
 			</div>
+			<div class="view_profile">
+				<button class="button" type="submit" title="Click to view profile">Book</button>
+			</div>
 		</form>
-		<div class="view_profile">
-			<button class="button" title="Click to view profile">Book</button>
-		</div>
 	</div>
 </section>
 {% endblock %}

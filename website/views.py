@@ -51,8 +51,8 @@ def profile():
     hk = HouseKeeper.query.filter_by(user_id=current_user.id).first()
     if hk:
         # Check first if the user is a registered housekeeper
-        return redirect(url_for("views.profile_by_id", hk_id=hk.id))
-    return render_template("profile.html", user=current_user)
+        return redirect(url_for("views.profile_by_id", hk_id=hk.id))                                                                                                    
+    return render_template("profile.html", user=current_user, hk=None)
 
 # For ordinary users
 @views.route("/settings", methods=["GET", "POST"])
@@ -60,10 +60,19 @@ def profile():
 def settings():
     return render_template("settings.html", user=current_user)
 
-@views.route("/book")
+@views.route("/book/<hk_id>", method=["GET", "POST"])
 @login_required
-def book():
-    return render_template("book.html", user=current_user)
+def book(hk_id):
+    if request.method == "POST":
+    else:
+        housekeeper = HouseKeeper.query.filter_by(id=hk_id).first()
+        if hk_id == current_user.id or not housekeeper:
+            flash("Cannot access this profile", category="error")
+            return redirect(url_for("views.home"))
+        else:
+            user = User.query.filter_by(id=housekeeper.user_id).first()
+            return render_template("book.html", user=current_user, hk=(user, housekeeper))
+            # Passing an argumnets returns a tuples contaianing both users and houskeepers
 
 @views.route("/account_type")
 @login_required

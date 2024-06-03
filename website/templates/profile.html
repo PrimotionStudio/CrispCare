@@ -4,16 +4,23 @@ block search_or_heading %} {% endblock %} {% block section_or_body %}
 <section>
 	<div class="card">
 		<div class="photo" title="Person Person"></div>
-		<h3 class="fullname">{{ hk[0].fullname }}</h3>
+		<h3 class="fullname">
+			{% if hk == None %} {{ user.fullname }} {% else %} {{ hk[0].fullname
+			}} {% endif %}
+		</h3>
 		<div class="rating"><p>&star;&star;&star;&star;&star;</p></div>
 		<div class="description">
-			<p>{{ hk[1]["intro"] }}</p>
+			<p>{% if hk != None %} {{ hk[1]["intro"] }} {% endif %}</p>
 		</div>
+		{% if hk != None %}
 		<h4 class="skillset">Skillset</h4>
 		<p class="skills">{{ hk[1]["skillset"] }}</p>
+		{% if hk[0].id != user.id %}
 		<div class="view_profile">
-			<button class="button" title="Click to book person">Book</button>
+			<a href="{{ url_for('views.book', hk_id=hk[0].id) }}" class="button" title="Click to book person">Book</a>
 		</div>
+		{% endif %}
+		{% endif %}
 	</div>
 	<div class="cardx2">
 		<h3>Reviews</h3>

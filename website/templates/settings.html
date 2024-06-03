@@ -5,74 +5,26 @@ block search_or_heading %} {% endblock %} {% block section_or_body %}
 	<div class="card">
 		<div class="photo" title="Person Person"></div>
 		<h3 class="fullname">Lorem, ipsum.</h3>
-		<div class="rating"><p>&star;&star;&star;&star;&star;</p></div>
-		<div class="description">
-			<p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsam illum, fuga aut consequuntur libero harum provident delectus ex vel vero!</p>
-		</div>
-		<h4 class="skillset">Skillset</h4>
-		<p class="skills">Lorem ipsum dolor sit.</p>
-		<div class="view_profile">
-			<button class="button" title="Click to book person">Book</button>
-		</div>
 	</div>
 	<div class="cardx2">
-		<h3>Reviews</h3>
-		<div class="review">
-			<div class="critic"></div>
-			<div class="feedback">
-				<p>
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-					Aliquam, odit nobis, fuga reiciendis fugia necessitatibus
-					omnis tenetur labore nesciunt corrupti explicabo aliquid
-					numquam?
-					<span class="vote">&#128077;</span>
-					<span class="vote">&#128078;</span>
-					<span class="count">5 Votes</span>
-				</p>
+		<h3>Settings</h3>
+		<form action="" method="post">
+			<div class="entry">
+				<label for="name">Name</label>
+				<input type="text" name="name" id="name" />
 			</div>
-		</div>
-		<div class="review">
-			<div class="critic"></div>
-			<div class="feedback">
-				<p>
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-					Aliquam, odit nobis, fuga reiciendis fugia necessitatibus
-					omnis tenetur labore nesciunt corrupti explicabo aliquid
-					numquam?
-					<span class="vote">&#128077;</span>
-					<span class="vote">&#128078;</span>
-					<span class="count">5 Votes</span>
-				</p>
+			<div class="entry">
+				<label for="email">Email</label>
+				<input type="email" name="email" id="email" />
 			</div>
-		</div>
-		<div class="review">
-			<div class="critic"></div>
-			<div class="feedback">
-				<p>
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-					Aliquam, odit nobis, fuga reiciendis fugia necessitatibus
-					omnis tenetur labore nesciunt corrupti explicabo aliquid
-					numquam?
-					<span class="vote">&#128077;</span>
-					<span class="vote">&#128078;</span>
-					<span class="count">5 Votes</span>
-				</p>
+			<div class="entry">
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password" />
 			</div>
-		</div>
-		<div class="review">
-			<div class="critic"></div>
-			<div class="feedback">
-				<p>
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-					Aliquam, odit nobis, fuga reiciendis fugia necessitatibus
-					omnis tenetur labore nesciunt corrupti explicabo aliquid
-					numquam?
-					<span class="vote">&#128077;</span>
-					<span class="vote">&#128078;</span>
-					<span class="count">5 Votes</span>
-				</p>
+			<div class="view_profile">
+				<button class="button" type="submit">Submit</button>
 			</div>
-		</div>
+		</form>
 	</div>
 </section>
 {% endblock %}
