@@ -35,7 +35,7 @@ def index():
 # For housekeepers
 @views.route("/profile/<hk_id>")
 def profile_by_id(hk_id):
-    housekeeper = HouseKeeper.query.filter_by(id=hk_id).first()
+    housekeeper = HouseKeeper.query.filter_by(user_id=hk_id).first()
     if housekeeper:
         user = User.query.filter_by(id=housekeeper.user_id).first()
         return render_template("profile.html", user=current_user, hk=(user, housekeeper))
@@ -66,7 +66,7 @@ def book(hk_id):
     if request.method == "POST":
         pass
     else:
-        housekeeper = HouseKeeper.query.filter_by(id=hk_id).first()
+        housekeeper = HouseKeeper.query.filter_by(user_id=hk_id).first()
         if hk_id == current_user.id or not housekeeper:
             flash("Cannot access this profile", category="error")
             return redirect(url_for("views.home"))
