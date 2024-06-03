@@ -51,7 +51,7 @@ def profile():
     hk = HouseKeeper.query.filter_by(user_id=current_user.id).first()
     if hk:
         # Check first if the user is a registered housekeeper
-        return redirect(url_for("views.profile_by_id", hk_id=hk.id))                                                                                                    
+        return redirect(url_for("views.profile_by_id", hk_id=hk.id))
     return render_template("profile.html", user=current_user, hk=None)
 
 # For ordinary users
@@ -60,10 +60,11 @@ def profile():
 def settings():
     return render_template("settings.html", user=current_user)
 
-@views.route("/book/<hk_id>", method=["GET", "POST"])
+@views.route("/book/<hk_id>", methods=["GET", "POST"])
 @login_required
 def book(hk_id):
     if request.method == "POST":
+        pass
     else:
         housekeeper = HouseKeeper.query.filter_by(id=hk_id).first()
         if hk_id == current_user.id or not housekeeper:

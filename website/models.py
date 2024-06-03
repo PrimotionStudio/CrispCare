@@ -8,7 +8,9 @@ class Booking(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     housekeeper_id = db.Column(db.Integer, db.ForeignKey('housekeeper.id'), nullable=False)
     description = db.Column(db.String(5000), nullable=True)
-    timestamp = db.Column(db.DateTime(timezone=True), default=func.now())
+    start_date = db.Column(db.Date, nullable=False)
+    end_date = db.Column(db.Date, nullable=False)
+    status = db.Column(db.String(50), default='pending')
 
 class HouseKeeper(db.Model):
     __tablename__ = 'housekeeper'
