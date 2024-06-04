@@ -14,7 +14,7 @@ def get_hk(hk_id):
     return HouseKeeper.query.filter_by(id=hk_id).first()
 
 def get_housekeepers():
-    housekeepers = HouseKeeper.query.all()
+    housekeepers = HouseKeeper.query.order_by(HouseKeeper.id.desc()).all()
     users = []
     for housekeeper in housekeepers:
         users.append(User.query.filter_by(id=housekeeper.user_id).first())
@@ -52,10 +52,13 @@ def profile_by_id(hk_id):
     housekeeper = HouseKeeper.query.filter_by(user_id=hk_id).first()
     if housekeeper:
         user = User.query.filter_by(id=housekeeper.user_id).first()
-        review = Review.query.filter_by(housekeeper_id=current_user.id).all()
-        if review is None or review == []:
-            review = []
-        return render_template("profile.html", user=current_user, hk=(user, housekeeper), reviews=review)
+        reviews = Review.query.filter_by(housekeeper_id=hk_id).order_by(Review.id.desc()).all()
+        if reviews is None or reviews == []:
+            reviews = []
+        critics = []
+        for review in reviews:
+            critics.append(get_user(review.user_id))
+        return render_template("profile.html", user=current_user, hk=(user, housekeeper), reviews=zip(reviews, critics))
         # Passing an argumnets returns a tuples contaianing both users and houskeepers
     else:
         flash("Cannot access this profile", category="error")
@@ -150,13 +153,13 @@ def complete_booking():
 def bookings():
     if current_user.role == "housekeeper":
         hk = HouseKeeper.query.filter_by(user_id=current_user.id).first()
-        bookings = Booking.query.filter_by(housekeeper_id=hk.id).all()
+        bookings = Booking.query.filter_by(housekeeper_id=hk.id).order_by(Booking.id.desc()).all()
         clients = []
         for booking in bookings:
             clients.append(get_user(booking.user_id))
         return render_template("bookings.html", user=current_user, bookings=zip(bookings, clients))
     else:
-        bookings = Booking.query.filter_by(user_id=current_user.id).all()
+        bookings = Booking.query.filter_by(user_id=current_user.id).order_by(Booking.id.desc()).all()
         hks = []
         for booking in bookings:
             hks.append(get_user(get_hk(booking.housekeeper_id).user_id))

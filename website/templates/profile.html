@@ -29,16 +29,14 @@ block search_or_heading %} {% endblock %} {% block section_or_body %}
 			<div class="critic"></div>
 			<div class="feedback">
 				<p>
-					{{review.description}} -
-					<b>{{ review.stars }} Stars</b>
+					{{review[0].description}}
 				</p>
-				<p><sub>By </sub>
+				<p><sub>By {{review[1].fullname}}</sub>
 				</p>
 				<p>
 					
-					<span class="vote">&#128077;</span>
-					<span class="vote">&#128078;</span>
-					<span class="count">5 Votes</span>
+					<span class="vote">&star;</span>
+					<span class="count">{{ review[0].stars }} Stars</span>
 				</p>
 			</div>
 		</div>
