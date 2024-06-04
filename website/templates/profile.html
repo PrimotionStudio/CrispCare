@@ -24,62 +24,25 @@ block search_or_heading %} {% endblock %} {% block section_or_body %}
 	</div>
 	<div class="cardx2">
 		<h3>Reviews</h3>
+		{% for review in reviews%}
 		<div class="review">
 			<div class="critic"></div>
 			<div class="feedback">
 				<p>
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-					Aliquam, odit nobis, fuga reiciendis fugia necessitatibus
-					omnis tenetur labore nesciunt corrupti explicabo aliquid
-					numquam?
+					{{review.description}} -
+					<b>{{ review.stars }} Stars</b>
+				</p>
+				<p><sub>By </sub>
+				</p>
+				<p>
+					
 					<span class="vote">&#128077;</span>
 					<span class="vote">&#128078;</span>
 					<span class="count">5 Votes</span>
 				</p>
 			</div>
 		</div>
-		<div class="review">
-			<div class="critic"></div>
-			<div class="feedback">
-				<p>
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-					Aliquam, odit nobis, fuga reiciendis fugia necessitatibus
-					omnis tenetur labore nesciunt corrupti explicabo aliquid
-					numquam?
-					<span class="vote">&#128077;</span>
-					<span class="vote">&#128078;</span>
-					<span class="count">5 Votes</span>
-				</p>
-			</div>
-		</div>
-		<div class="review">
-			<div class="critic"></div>
-			<div class="feedback">
-				<p>
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-					Aliquam, odit nobis, fuga reiciendis fugia necessitatibus
-					omnis tenetur labore nesciunt corrupti explicabo aliquid
-					numquam?
-					<span class="vote">&#128077;</span>
-					<span class="vote">&#128078;</span>
-					<span class="count">5 Votes</span>
-				</p>
-			</div>
-		</div>
-		<div class="review">
-			<div class="critic"></div>
-			<div class="feedback">
-				<p>
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-					Aliquam, odit nobis, fuga reiciendis fugia necessitatibus
-					omnis tenetur labore nesciunt corrupti explicabo aliquid
-					numquam?
-					<span class="vote">&#128077;</span>
-					<span class="vote">&#128078;</span>
-					<span class="count">5 Votes</span>
-				</p>
-			</div>
-		</div>
+		{% endfor %}
 	</div>
 </section>
 {% endblock %}

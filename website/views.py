@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, render_template, redirect, url_for, flash
 from flask_login import login_required, current_user
-from .models import User, HouseKeeper, Booking
+from .models import User, HouseKeeper, Booking, Review
 from . import db
 
 views = Blueprint('views', __name__)
@@ -52,7 +52,10 @@ def profile_by_id(hk_id):
     housekeeper = HouseKeeper.query.filter_by(user_id=hk_id).first()
     if housekeeper:
         user = User.query.filter_by(id=housekeeper.user_id).first()
-        return render_template("profile.html", user=current_user, hk=(user, housekeeper))
+        review = Review.query.filter_by(housekeeper_id=current_user.id).all()
+        if review is None or review == []:
+            review = []
+        return render_template("profile.html", user=current_user, hk=(user, housekeeper), reviews=review)
         # Passing an argumnets returns a tuples contaianing both users and houskeepers
     else:
         flash("Cannot access this profile", category="error")
@@ -139,7 +142,7 @@ def complete_booking():
             flash("You have marked this job as completed", category="success")
         else:
             flash("An error occured while completing job", category="error")
-    return redirect(url_for("views.bookings"))
+    return render_template("review.html", user=current_user, hk=(get_user(get_hk(hk_id).user_id), get_hk(hk_id)))
 
 
 @views.route("/bookings")
@@ -215,47 +218,59 @@ def set_housekeeper():
         return redirect(url_for('views.home'))
     return render_template("housekeeper.html", user=current_user)
 
+@views.route("/review/<hk_id>", methods=["POST"])
+@login_required
+def review(hk_id):
+    if request.method == "POST":
+        description = request.form.get("description")
+        stars = request.form.get("stars")
+        review = Review(user_id=current_user.id, housekeeper_id=hk_id,
+                              description=description, stars=stars)
+        db.session.add(review)
+        db.session.commit()
+        flash(f"Thank you for the review", category="success")
+    return redirect(url_for("views.profile_by_id", hk_id=hk_id))
 
-@views.route('/api/househelps', methods=['GET'])
-def get_househelps():
-    househelps = HouseKeeper.query.all()
-    househelps_list = []
-    for h in househelps:
-        househelp_dict = {
-            'id': h.id,
-            'name': h.name,
-            'age': h.age,
-            'services': h.services,
-            'rating': h.rating
-        }
-        househelps_list.append(househelp_dict)
-    return jsonify(househelps_list)
-
-
-@views.route('/api/book', methods=['POST'])
-def book_househelp():
-    data = request.get_json()
-    new_booking = Booking(
-        user_id=data['user_id'],
-        househelp_id=data['househelp_id'],
-        date=data['date'],
-        time=data['time'],
-        requirements=data.get('requirements', '')
-    )
-    db.session.add(new_booking)
-    db.session.commit()
-    return jsonify({'message': 'Booking successful!'})
+# @views.route('/api/househelps', methods=['GET'])
+# def get_househelps():
+#     househelps = HouseKeeper.query.all()
+#     househelps_list = []
+#     for h in househelps:
+#         househelp_dict = {
+#             'id': h.id,
+#             'name': h.name,
+#             'age': h.age,
+#             'services': h.services,
+#             'rating': h.rating
+#         }
+#         househelps_list.append(househelp_dict)
+#     return jsonify(househelps_list)
 
 
-@views.route('/api/register_househelp', methods=['POST'])
-def register_househelp():
-    data = request.get_json()
-    new_househelp = HouseKeeper(
-        name=data['name'],
-        age=data['age'],
-        services=data['services'],
-        rating=data['rating']
-    )
-    db.session.add(new_househelp)
-    db.session.commit()
-    return jsonify({'message': 'HouseHelp registration successful!', 'househelp_id': new_househelp.id})
+# @views.route('/api/book', methods=['POST'])
+# def book_househelp():
+#     data = request.get_json()
+#     new_booking = Booking(
+#         user_id=data['user_id'],
+#         househelp_id=data['househelp_id'],
+#         date=data['date'],
+#         time=data['time'],
+#         requirements=data.get('requirements', '')
+#     )
+#     db.session.add(new_booking)
+#     db.session.commit()
+#     return jsonify({'message': 'Booking successful!'})
+
+
+# @views.route('/api/register_househelp', methods=['POST'])
+# def register_househelp():
+#     data = request.get_json()
+#     new_househelp = HouseKeeper(
+#         name=data['name'],
+#         age=data['age'],
+#         services=data['services'],
+#         rating=data['rating']
+#     )
+#     db.session.add(new_househelp)
+#     db.session.commit()
+#     return jsonify({'message': 'HouseHelp registration successful!', 'househelp_id': new_househelp.id})
