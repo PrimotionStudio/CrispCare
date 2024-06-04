@@ -1,0 +1,50 @@
+{% extends "base.html" %} {% block title %}Bookings - Crisp Care{% endblock %}
+{% block search_or_heading %} {% endblock %} {% block section_or_body %}
+
+<section>
+	<div class="card">
+		<div class="photo" title="Person Person"></div>
+		<h3 class="fullname">{{ user.fullname }}</h3>
+		<div class="rating"><p>&star;&star;&star;&star;&star;</p></div>
+		<div class="description">
+			<p></p>
+		</div>
+		<h4 class="skillset">Skillset</h4>
+		<p class="skills"></p>
+		<div class="view_profile">
+			<!-- <a href="{{ url_for('views.profile') }}" class="button" title="Click to book person">Book</a> -->
+		</div>
+	</div>
+	<div class="cardx2">
+		<h3>Reviews</h3>
+		{% for booking in bookings %}
+		<div class="review">
+			<div class="critic"></div>
+			<div class="feedback">
+				{% if user.role == "housekeeper" %}
+				<p>
+					You have been booked by <b>{{ booking[1].fullname }}</b> to
+					<b>{{ booking[0].description }}</b> @
+					<b><i>{{ booking[0].location }}</i></b>
+				</p>
+				<p>
+					<span class="date">From <b>{{ booking[0].start_date }}</b> to <b>{{ booking[0].end_date }}</b></span>
+
+				</p>
+				{% else %}
+				<p>
+					You booked <b>{{ booking[1].fullname }}</b> for
+					<b>{{ booking[0].description }}</b> @
+					<b><i>{{ booking[0].location }}</i></b>
+				</p>
+				<p>
+					<span class="date">From <b>{{ booking[0].start_date }}</b> to <b>{{ booking[0].end_date }}</b></span>
+
+				</p>
+				{% endif %}
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</section>
+{% endblock %}

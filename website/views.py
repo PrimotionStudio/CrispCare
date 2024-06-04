@@ -5,11 +5,14 @@ from . import db
 
 views = Blueprint('views', __name__)
 
+
 def get_user(user_id):
     return User.query.filter_by(id=user_id).first()
 
+
 def get_hk(hk_id):
     return HouseKeeper.query.filter_by(id=hk_id).first()
+
 
 def get_housekeepers():
     housekeepers = HouseKeeper.query.all()
@@ -77,6 +80,23 @@ def settings():
     return render_template("settings.html", user=current_user)
 
 
+@views.route("/bookings")
+@login_required
+def bookings():
+    if current_user.role == "housekeeper":
+        bookings = Booking.query.filter_by(hk_id=current_user.id).all()
+        clients = []
+        for booking in bookings:
+            clients.append(get_user(booking.user_id))
+        return render_template("bookings.html", user=current_user, bookings=zip(bookings, clients))
+    else:
+        bookings = Booking.query.filter_by(user_id=current_user.id).all()
+        hks = []
+        for booking in bookings:
+            hks.append(get_user(get_hk(booking.housekeeper_id).user_id))
+        return render_template("bookings.html", user=current_user, bookings=zip(bookings, hks))
+
+
 @views.route("/book/<hk_id>", methods=["GET", "POST"])
 @login_required
 def book(hk_id):
@@ -89,7 +109,8 @@ def book(hk_id):
                               description=description, start_date=start_date, end_date=end_date, location=location)
         db.session.add(new_booking)
         db.session.commit()
-        flash(f"You have booked {get_user(get_hk(hk_id).user_id).fullname} for {start_date}", category="success")
+        flash(f"You have booked {get_user(get_hk(hk_id).user_id).fullname} for {
+              start_date}", category="success")
         return redirect(url_for("views.profile_by_id", hk_id=hk_id))
     else:
         housekeeper = HouseKeeper.query.filter_by(user_id=hk_id).first()
