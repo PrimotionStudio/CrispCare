@@ -178,8 +178,7 @@ def book(hk_id):
                               description=description, start_date=start_date, end_date=end_date, location=location)
         db.session.add(new_booking)
         db.session.commit()
-        flash(f"You have booked {get_user(get_hk(hk_id).user_id).fullname} for {
-              start_date}", category="success")
+        flash("You have booked {} for {}".format(get_user(get_hk(hk_id).user_id).fullname, start_date), category="success")
         return redirect(url_for("views.profile_by_id", hk_id=hk_id))
     else:
         housekeeper = HouseKeeper.query.filter_by(user_id=hk_id).first()
