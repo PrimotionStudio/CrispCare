@@ -25,6 +25,7 @@
 					onclick="window.location.assign('{{url_for("auth.logout")}}')"
 				>{{url_for("auth.logout")}}</div>
 				{% else %}
+				<div class="logo"></div>
 				<ul class="nav">
 					<li><a href="{{url_for('views.front_page')}}">Home</a></li>
 					<li>About</li>

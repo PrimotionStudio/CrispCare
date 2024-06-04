@@ -11,7 +11,7 @@ class Booking(db.Model):
     start_date = db.Column(db.DateTime, nullable=False)
     end_date = db.Column(db.DateTime, nullable=False)
     location = db.Column(db.String(50), nullable=False)
-    status = db.Column(db.String(50), default='booked') # status: booked, pending, terminated, completed
+    status = db.Column(db.String(50), default='booked') # status: booked, accepted, declined, terminated, completed
 
 class HouseKeeper(db.Model):
     __tablename__ = 'housekeeper'

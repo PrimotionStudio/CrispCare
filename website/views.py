@@ -8,11 +8,10 @@ views = Blueprint('views', __name__)
 
 def get_user(user_id):
     return User.query.filter_by(id=user_id).first()
-
-
+def get_booking(book_id):
+    return Booking.query.filter_by(id=book_id).first()
 def get_hk(hk_id):
     return HouseKeeper.query.filter_by(id=hk_id).first()
-
 
 def get_housekeepers():
     housekeepers = HouseKeeper.query.all()
@@ -78,6 +77,69 @@ def profile():
 @login_required
 def settings():
     return render_template("settings.html", user=current_user)
+
+
+@views.route("/bookings/accept", methods=["POST"])
+@login_required
+def accept_booking():
+    if request.method == "POST":
+        hk_id = request.form.get("hk_id")
+        booking_id = request.form.get("book_id")
+        if current_user.id == get_hk(hk_id).user_id:
+            book = Booking.query.get(booking_id)
+            book.status = "accepted"
+            db.session.commit()
+            flash("You have accepted this job", category="success")
+        else:
+            flash("An error occured while accepting booking", category="error")
+    return redirect(url_for("views.bookings"))
+
+@views.route("/bookings/decline", methods=["POST"])
+@login_required
+def decline_booking():
+    if request.method == "POST":
+        hk_id = request.form.get("hk_id")
+        booking_id = request.form.get("book_id")
+        if current_user.id == get_hk(hk_id).user_id:
+            book = Booking.query.get(booking_id)
+            book.status = "declined"
+            db.session.commit()
+            flash("You have declined this job", category="success")
+        else:
+            flash("An error occured while declining booking", category="error")
+    return redirect(url_for("views.bookings"))
+
+
+@views.route("/bookings/terminate", methods=["POST"])
+@login_required
+def terminate_booking():
+    if request.method == "POST":
+        hk_id = request.form.get("hk_id")
+        booking_id = request.form.get("book_id")
+        if current_user.id == get_hk(hk_id).user_id or current_user.id == get_booking(booking_id).user_id:
+            book = Booking.query.get(booking_id)
+            book.status = "terminated"
+            db.session.commit()
+            flash("You have terminated this job", category="success")
+        else:
+            flash("An error occured while terminating booking", category="error")
+    return redirect(url_for("views.bookings"))
+
+
+@views.route("/bookings/complete", methods=["POST"])
+@login_required
+def complete_booking():
+    if request.method == "POST":
+        hk_id = request.form.get("hk_id")
+        booking_id = request.form.get("book_id")
+        if current_user.id == get_hk(hk_id).user_id or current_user.id == get_booking(booking_id).user_id:
+            book = Booking.query.get(booking_id)
+            book.status = "completed"
+            db.session.commit()
+            flash("You have marked this job as completed", category="success")
+        else:
+            flash("An error occured while completing job", category="error")
+    return redirect(url_for("views.bookings"))
 
 
 @views.route("/bookings")

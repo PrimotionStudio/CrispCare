@@ -5,7 +5,9 @@
 	<div class="card">
 		<div class="photo" title="Person Person"></div>
 		<h3 class="fullname">{{ user.fullname }}</h3>
-		<div class="rating"><p>&star;&star;&star;&star;&star;</p></div>
+		<div class="rating">
+			<p>&star;&star;&star;&star;&star;</p>
+		</div>
 		<div class="description">
 			<p></p>
 		</div>
@@ -22,25 +24,102 @@
 			<div class="critic"></div>
 			<div class="feedback">
 				{% if user.role == "housekeeper" %}
-				<p>
-					You have been booked by <b>{{ booking[1].fullname }}</b> to
-					<b>{{ booking[0].description }}</b> @
-					<b><i>{{ booking[0].location }}</i></b>
-				</p>
-				<p>
-					<span class="date">From <b>{{ booking[0].start_date }}</b> to <b>{{ booking[0].end_date }}</b></span>
+				<div class="booking">
+					<div class="info">
+						<p>
+							You have been booked by
+							<b>{{ booking[1].fullname|capitalize }}</b>
+						</p>
+						<p>
+							Description:
+							<b>{{ booking[0].description|capitalize }}</b>
+						</p>
+						<p>
+							Location:<b><i>{{ booking[0].location|capitalize }}</i></b>
+						</p>
+						<p>
+							<span class="date">From <b>{{ booking[0].start_date }}</b> to
+								<b>{{ booking[0].end_date }}</b></span>
+						</p>
+						<p>Status: <b>{{ booking[0].status|capitalize }}</b></p>
+					</div>
+					{% if booking[0].status != "terminated" and
+					booking[0].status != "completed" and booking[0].status !=
+					"declined" and
+					booking[0].status != "accepted" %}
+					<div class="action">
+						<form action="{{ url_for('views.accept_booking') }}" method="post">
+							<input type="hidden" name="hk_id" value="{{booking[0].housekeeper_id}}" />
+							<input type="hidden" name="book_id" value="{{booking[0].id}}" />
+							<button class="accept" title="Accept Booking" type="submit">
+								&#10003;
+							</button>
+						</form>
+						<form action="{{ url_for('views.decline_booking') }}" method="post">
+							<input type="hidden" name="hk_id" value="{{booking[0].housekeeper_id}}" />
+							<input type="hidden" name="book_id" value="{{booking[0].id}}" />
+							<button class="decline" title="Decline Booking" type="submit">
+								&#x274C;
+							</button>
+						</form>
+					</div>
+					{% endif %}
 
-				</p>
+				</div>
 				{% else %}
-				<p>
-					You booked <b>{{ booking[1].fullname }}</b> for
-					<b>{{ booking[0].description }}</b> @
-					<b><i>{{ booking[0].location }}</i></b>
-				</p>
-				<p>
-					<span class="date">From <b>{{ booking[0].start_date }}</b> to <b>{{ booking[0].end_date }}</b></span>
-
-				</p>
+				<div class="booking">
+					<div class="info">
+						<p>
+							You booked
+							<b>{{ booking[1].fullname|capitalize }}</b>
+						</p>
+						<p>
+							Description:
+							<b>{{ booking[0].description|capitalize }}</b>
+						</p>
+						<p>
+							Location:
+							<b><i>{{ booking[0].location|capitalize }}</i></b>
+						</p>
+						<p>
+							<span class="date">From <b>{{ booking[0].start_date }}</b> to
+								<b>{{ booking[0].end_date }}</b></span>
+						</p>
+						<p>Status: <b>{{ booking[0].status|capitalize }}</b></p>
+					</div>
+					{% if booking[0].status != "terminated" and
+					booking[0].status != "completed" and booking[0].status !=
+					"declined" and
+					booking[0].status != "accepted" %}
+					<div class="action">
+						<form action="{{ url_for('views.terminate_booking') }}" method="post">
+							<input type="hidden" name="hk_id" value="{{booking[0].housekeeper_id}}" />
+							<input type="hidden" name="book_id" value="{{booking[0].id}}" />
+							<button class="terminate" title="Terminate Booking" type="submit">
+								&#x274C;
+							</button>
+						</form>
+					</div>
+					{% endif %}
+					{% if booking[0].status == "accepted" %}
+					<div class="action">
+						<form action="{{ url_for('views.complete_booking') }}" method="post">
+							<input type="hidden" name="hk_id" value="{{booking[0].housekeeper_id}}" />
+							<input type="hidden" name="book_id" value="{{booking[0].id}}" />
+							<button class="complete" title="Complete Booking" type="submit">
+								&#10003;
+							</button>
+						</form>
+						<form action="{{ url_for('views.terminate_booking') }}" method="post">
+							<input type="hidden" name="hk_id" value="{{booking[0].housekeeper_id}}" />
+							<input type="hidden" name="book_id" value="{{booking[0].id}}" />
+							<button class="terminate" title="Terminate Booking" type="submit">
+								&#x274C;
+							</button>
+						</form>
+					</div>
+					{% endif %}
+				</div>
 				{% endif %}
 			</div>
 		</div>
