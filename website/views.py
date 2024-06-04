@@ -38,7 +38,6 @@ def contact():
 @views.route("/home")
 @login_required
 def home():
-    print(current_user.__dict__)
     return render_template("index.html", user=current_user, hks=get_housekeepers())
 
 

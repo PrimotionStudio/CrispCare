@@ -45,7 +45,6 @@ def login():
         else:
             # All is good here
             if user:
-                print(user.__dict__)
                 if check_password_hash(user.password, password):
                     login_user(user, remember=True)
                     flash("Login Successful", category="success")
