@@ -38,6 +38,7 @@ def contact():
 @views.route("/home")
 @login_required
 def home():
+    print(current_user.__dict__)
     return render_template("index.html", user=current_user, hks=get_housekeepers())
 
 
@@ -68,7 +69,7 @@ def profile():
     hk = HouseKeeper.query.filter_by(user_id=current_user.id).first()
     if hk:
         # Check first if the user is a registered housekeeper
-        return redirect(url_for("views.profile_by_id", hk_id=hk.id))
+        return redirect(url_for("views.profile_by_id", hk_id=current_user.id))
     return render_template("profile.html", user=current_user, hk=None)
 
 # For ordinary users
@@ -84,7 +85,8 @@ def settings():
 @login_required
 def bookings():
     if current_user.role == "housekeeper":
-        bookings = Booking.query.filter_by(hk_id=current_user.id).all()
+        hk = HouseKeeper.query.filter_by(user_id=current_user.id).first()
+        bookings = Booking.query.filter_by(housekeeper_id=hk.id).all()
         clients = []
         for booking in bookings:
             clients.append(get_user(booking.user_id))

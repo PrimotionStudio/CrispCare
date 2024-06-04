@@ -5,7 +5,7 @@ block search_or_heading %} {% endblock %} {% block section_or_body %}
 	<div class="card">
 		<div class="photo" title="Person Person"></div>
 		<h3 class="fullname">
-			{% if hk == None %} {{ user.fullname }} {% else %} {{ hk[0].fullname
+			{% if user %} {{ user.fullname }} {% else %} {{ hk[0].fullname
 			}} {% endif %}
 		</h3>
 		<div class="rating"><p>&star;&star;&star;&star;&star;</p></div>

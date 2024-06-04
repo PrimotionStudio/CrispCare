@@ -12,8 +12,8 @@
 	<body>
 		<header>
 			<div class="top_header">
-				<div class="logo"></div>
 				{% if user.is_authenticated %} 
+				<div class="logo">{{ user.fullname }}</div>
 				<ul class="nav">
 					<li><a href="{{url_for('views.home')}}">Home</a></li>
 					<li><a href="{{url_for('views.profile')}}">Profile</a></li>
