@@ -3,7 +3,6 @@ attrs==23.2.0
 Babel==2.10.3
 bcrypt==3.2.2
 blinker==1.7.0
-fildem==2.0.1
 Flask==3.0.2
 Flask-Login==0.6.3
 Flask-SQLAlchemy==3.1.1
