@@ -1,18 +1,13 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
 db = SQLAlchemy()
-
 
 def create_app():
     app = Flask(__name__)
     app.config['SECRET_KEY'] = 'your_secret_key'
-    DB_PASSWORD = os.getenv('DB_PASSWORD')
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://sql3711783:{}@sql3.freemysqlhosting.net:3306/sql3711783'.format(DB_PASSWORD)
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://admin:admin@localhost/crisp_care'
 
     db.init_app(app)
 
