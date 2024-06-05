@@ -52,7 +52,7 @@ def profile_by_id(hk_id):
     housekeeper = HouseKeeper.query.filter_by(user_id=hk_id).first()
     if housekeeper:
         user = User.query.filter_by(id=housekeeper.user_id).first()
-        reviews = Review.query.filter_by(housekeeper_id=hk_id).order_by(Review.id.desc()).all()
+        reviews = Review.query.filter_by(housekeeper_id=housekeeper.id).order_by(Review.id.desc()).all()
         if reviews is None or reviews == []:
             reviews = []
         critics = []
@@ -179,10 +179,10 @@ def book(hk_id):
         db.session.add(new_booking)
         db.session.commit()
         flash("You have booked {} for {}".format(get_user(get_hk(hk_id).user_id).fullname, start_date), category="success")
-        return redirect(url_for("views.profile_by_id", hk_id=hk_id))
+        return redirect(url_for("views.profile_by_id", hk_id=get_hk(hk_id).user_id))
     else:
-        housekeeper = HouseKeeper.query.filter_by(user_id=hk_id).first()
-        if hk_id == current_user.id or not housekeeper:
+        housekeeper = HouseKeeper.query.filter_by(id=hk_id).first()
+        if get_hk(hk_id).user_id == current_user.id or not housekeeper:
             flash("Cannot access this profile", category="error")
             return redirect(url_for("views.home"))
         else:
@@ -230,8 +230,8 @@ def review(hk_id):
                               description=description, stars=stars)
         db.session.add(review)
         db.session.commit()
-        flash(f"Thank you for the review", category="success")
-    return redirect(url_for("views.profile_by_id", hk_id=hk_id))
+        flash("Thank you for the review", category="success")
+    return redirect(url_for("views.profile_by_id", hk_id=get_hk(hk_id).user_id))
 
 # @views.route('/api/househelps', methods=['GET'])
 # def get_househelps():

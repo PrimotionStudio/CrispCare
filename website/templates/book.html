@@ -23,7 +23,7 @@ block search_or_heading %} {% endblock %} {% block section_or_body %}
 			<h3>Description of housekeeping activies</h3>
 		</div>
 		<form
-			action="{{ url_for('views.book', hk_id=hk[0].id) }}"
+			action="{{ url_for('views.book', hk_id=hk[1].id) }}"
 			method="post"
 		>
 			<div class="entry">

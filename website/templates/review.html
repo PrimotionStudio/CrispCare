@@ -23,7 +23,7 @@ block search_or_heading %} {% endblock %} {% block section_or_body %}
 			<h3>Leave a feedback on {{hk[0].fullname|capitalize}}'s performance</h3>
 		</div>
 		<form
-			action="{{ url_for('views.review', hk_id=hk[0].id) }}"
+			action="{{ url_for('views.review', hk_id=hk[1].id) }}"
 			method="post"
 		>
 			<div class="entry">
