@@ -1,0 +1,226 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	background-color: #f0f0f0;
+	font-family: "Almarai";
+}
+@font-face {
+	font-family: "Allison";
+	src: url("../fonts/Allison.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: "Almarai";
+	src: url("../fonts/Almarai.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+.nav {
+	margin: 0 5em;
+	padding: 0.5em 0;
+	display: flex;
+	position: sticky;
+	align-items: center;
+	justify-content: space-between;
+}
+.logo {
+	background: url("../images/crisp-care-high-resolution-logo-transparent.png")
+		no-repeat center center;
+	background-size: contain;
+	width: 180px;
+	height: 80px;
+}
+.logo-fill {
+	width: 180px;
+	height: 80px;
+}
+ul {
+	list-style: none;
+	display: inline-flex;
+	background-color: #1f85de;
+	border-radius: 5em;
+	color: #f0f0f0;
+	padding: 1em;
+}
+ul li {
+	padding: 0 2em;
+}
+ul li a {
+	color: #f0f0f0;
+	text-decoration: none;
+}
+div.banner {
+	display: flex;
+	justify-content: space-between;
+}
+.left-1 {
+	padding: 1em;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+.left-1 h2 {
+	font-family: "Allison";
+	font-weight: normal;
+	font-size: 5em;
+	width: 100%;
+	line-height: 0.8em;
+	padding-left: 1em;
+	padding-bottom: 0.5em;
+	display: inline-block;
+	overflow: hidden;
+	border-right: 0.15em solid #1f85de; /* Cursor effect */
+	white-space: nowrap;
+	letter-spacing: 0.15em;
+	animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+.writer {
+	white-space: nowrap;
+	overflow: hidden;
+	/* border-right: 0.15em solid #1f85de; Cursor effect */
+	animation: blink-caret 0.75s step-end infinite;
+}
+
+/* Typing effect */
+@keyframes typing {
+	from {
+		width: 0;
+	}
+	to {
+		width: 100%;
+	}
+}
+
+/* Blinking cursor effect */
+@keyframes blink-caret {
+	from,
+	to {
+		border-color: transparent;
+	}
+	50% {
+		border-color: #1f85de;
+	}
+}
+.left-1 .button {
+	background-color: #1f85de;
+	padding: 1em;
+	font-size: 1em;
+	font-weight: bolder;
+	text-decoration: none;
+	color: #f0f0f0;
+	border: none;
+	border-radius: 3em;
+}
+.right-2 {
+	background: url("../images/professional-cleaning-service-people-working-together-office.jpg")
+		no-repeat center center;
+	background-size: cover;
+	width: 50em;
+	height: 30em;
+	border-left: 3em solid #1f85de;
+}
+.features {
+	padding: 2em;
+	margin-top: 1em;
+	background-color: #1f85de80;
+	/* opacity: 50%; */
+	/* height: 40em; */
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+.features h1 {
+	text-align: center;
+}
+.features h1 span {
+	background-color: #f0f0f0;
+	font-family: "Allison";
+	font-size: 2.5em;
+}
+.feature1,
+.feature2 {
+	border: 1px solid black;
+	padding: 1em;
+	margin: 1em;
+}
+.feature1 {
+	display: flex;
+	justify-content: space-around;
+}
+.feature2 {
+	display: flex;
+	flex-direction: row-reverse;
+}
+.photo1 {
+	background: url("../images/profile.png") no-repeat center center;
+	background-size: contain;
+	height: 25em;
+	width: 70%;
+}
+.photo2 {
+	background: url("../images/book.png") no-repeat center center;
+	background-size: contain;
+	height: 25em;
+	width: 70%;
+}
+.photo3 {
+	background: url("../images/review.png") no-repeat center center;
+	background-size: contain;
+	height: 25em;
+	width: 70%;
+}
+.details {
+	width: 30%;
+	margin: auto;
+}
+.details h3 {
+	margin-bottom: 1em;
+}
+.about {
+	text-align: center;
+}
+.about h2 {
+	background-color: #1f85de;
+	color: #f0f0f0;
+	font-size: 1.5em;
+	width: 50%;
+	margin: 1em auto;
+	border: none;
+	padding: 1em;
+	border-radius: 5em;
+}
+.about .about-us {
+	background-color: #1f85de38;
+	/* color: #f0f0f0; */
+	font-size: 1.2em;
+	width: 50%;
+	margin: 1em auto;
+	border: none;
+	padding: 1em;
+	border-radius: 0.5em;
+}
+.about-us p {
+	line-height: 1.3em;
+}
+li .link {
+	margin: 0 1em;
+	color: #f0f0f0;
+}
+li .link:hover {
+	background-color: #f0f0f0;
+	color: #1f85de;
+	padding: 0.5em;
+	border-radius: 1em;
+	text-decoration: underline;
+}
+.team h3{
+	margin-bottom: 1em;
+}
+.team {
+	margin-bottom: 1em;;
+}

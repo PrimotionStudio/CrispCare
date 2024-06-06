@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Crisp Care</title>
+		<link
+			rel="shortcut icon"
+			href="{{ url_for('static', filename='assets/images/crisp-care-favicon-color.png') }}"
+			type="image/x-icon"
+		/>
+		<link
+			rel="stylesheet"
+			href="{{ url_for('static', filename='assets/css/about.css') }}"
+		/>
+	</head>
+
+	<body>
+		<div class="nav">
+			<div class="logo"></div>
+			<ul>
+				<li><a href="{{url_for('views.front_page')}}">Home</a></li>
+				<li><a href="{{url_for('views.about')}}">About</a></li>
+				<li><a href="{{url_for('views.contact')}}">Contact</a></li>
+			</ul>
+			<div class="logo-fill"></div>
+		</div>
+		<div class="banner">
+			<div class="left-1">
+				<div class="writer">
+					<h2>Let's help you<br />around the house</h2>
+				</div>
+				<a class="button" href="{{url_for('auth.login')}}">Get Started</a>
+			</div>
+			<div class="right-2"></div>
+		</div>
+		<div class="features">
+			<h1>What can you do with<br /><span>Crisp Care</span></h1>
+			<div class="feature1">
+				<div class="photo1"></div>
+				<div class="details">
+					<h3>Profile and View Reviews</h3>
+					<p>
+						You can view the profile of a potential housekeeper, see
+						the services that they offer, their overall performance
+						rating and what people think of them.
+					</p>
+				</div>
+			</div>
+			<div class="feature2">
+				<div class="photo2"></div>
+				<div class="details">
+					<h3>Booking</h3>
+					<p>
+						You can book a housekeeper to provides services by
+						specifying the services you wish to be rendered to you,
+						the date and time frame by which you would like the
+						housekeeper to start and finish rendering the service.
+					</p>
+				</div>
+			</div>
+			<div class="feature1">
+				<div class="photo3"></div>
+				<div class="details">
+					<h3>Feedback, Review & Rating</h3>
+					<p>
+						After a service has been rendered, you can leave a
+						feedback on the housekeeper's performance to enable
+						other homeowners make better decisions.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="about">
+			<h2>About Us: Making Time for What Matters</h2>
+			<div class="row">
+				<div class="about-us">
+					<p>
+						We created this web app because juggling a busy life
+						with a clean home can feel impossible. The inspiration
+						struck when Ngozi found herself constantly stressed
+						about maintaining a clean apartment while working long
+						hours. The dream of a sparkling home after a long day
+						felt out of reach.
+					</p>
+					<p>
+						This was in May, 2024 and the idea for a user-friendly
+						platform to connect with reliable housekeepers was born!
+						We, a team of aspiring developers at Holberton School
+						(check out our portfolio project!
+						<a href="http://crispcare.onrender.com">Crisp Care</a>
+						), decided to turn this frustration into a solution.
+					</p>
+				</div>
+				<div class="team">
+					<h3>Here's the team behind the web-app</h3>
+					<ul>
+						<li>
+							<b>Martins Okanlawon:</b><br><br><a class="link" href="https://www.linkedin.com/in/theprimotionstudio">LinkedIn</a><a class="link" href="https://github.com/primotionstudio">GitHub</a><a class="link" href="https://x.com/theprimotion">Twitter</a>
+						</li>
+						<li><b>Ngozi Ndukauba:</b><br><br><a class="link" href="https://www.linkedin.com/in/theprimotionstudio">LinkedIn</a><a class="link" href="https://github.com/vzika">GitHub</a><a class="link" href="https://x.com/theprimotion">Twitter</a></li>
+						<li>
+							<b>Isabella Akunekwu:</b
+							><br><br><a class="link"
+								href="https://www.linkedin.com/in/isabella-akunekwu-kosisochukwu-b199a71b4/"
+							>LinkedIn</a><a class="link" href="https://github.com/Bellacocho123">GitHub</a><a class="link" href="https://x.com/bellacocho/">Twitter</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
