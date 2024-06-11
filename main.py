@@ -1,3 +1,10 @@
+"""
+This module initializes the Flask application and database.
+
+Functions:
+- create_app(): Initializes the Flask application and database.
+"""
+
 from website import create_app, db
 
 app = create_app()
