@@ -47,13 +47,10 @@ To start the application, run:
 python3 -m main.py
 ```
 
-### Registering a House Help
+### Using the application
 
-To register a house help, you can use the following `curl` command:
+To start using crisp care, visit `http://localhost:5000` on your browser
 
-```sh
-curl -X POST -H "Content-Type: application/json" -d '{ "name": "Jane Doe", "age": 32, "services": "Cleaning, Babysitting", "rating": 4.8 }' http://localhost:5000/api/register_househelp
-```
 
 ## Project Structure
 
